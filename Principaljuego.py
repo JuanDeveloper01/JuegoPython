@@ -35,7 +35,7 @@ if __name__=='__main__':
     todos=pygame.sprite.Group()
     #jugador
     #Fondodel nivel
-    fondoPriN=pygame.image.load('Fondonivel1.jpg')
+    fondoPriN=pygame.image.load('Fondonivel1V.jpg')
     dim_fondoPriN=fondoPriN.get_rect()
     ventana=fondoPriN.subsurface(0,0, ANCHO, ALTO)
     var_f=0
@@ -223,7 +223,7 @@ if __name__=='__main__':
                     feca.var_x=-5
                     #feca.var_y=0
                     #feca.dir=1
-                    Pocahontas.dir=1
+                    #Pocahontas.dir=1
                 if event.key == pygame.K_d:
                     if feca.var_x == 0:
                         feca.var_x=5
