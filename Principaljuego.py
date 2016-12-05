@@ -44,18 +44,18 @@ if __name__=='__main__':
     animal=FuncionesTerreno.Recortar('feca.png',60,64)
     feca=Jugador.Jugador(animal[0][0])
     #Princesa
-    Princesa1=FuncionesTerreno.Recortar('Princesa.png',64,64)
-    Pocahontas=Princesa.Princesa(Princesa1[0][2])
+    #Princesa1=FuncionesTerreno.Recortar('Princesa.png',64,64)
+    #Pocahontas=Princesa.Princesa(Princesa1[0][2])
     #Dragon
-    Dragon1=FuncionesTerreno.Recortar('Dragon1.png',80,80)
-    Dragon=Enemigo.Enemigo(Dragon1[0][0])
+    #Dragon1=FuncionesTerreno.Recortar('Dragon1.png',80,80)
+    #Dragon=Enemigo.Enemigo(Dragon1[0][0])
 
-    Me_Dragon=FuncionesTerreno.Recortar('Muerte_Dragon.png',50,50)
-    muerte_Dragon1=muerte_Dragon.Muerte(Me_Dragon[0][0])
+    #Me_Dragon=FuncionesTerreno.Recortar('Muerte_Dragon.png',50,50)
+    #muerte_Dragon1=muerte_Dragon.Muerte(Me_Dragon[0][0])
 
-    muerte_Dragons=pygame.sprite.Group()
-    muerte_Dragons.add(muerte_Dragon1)
-    Tirar_Fuego=pygame.sprite.Group()
+    #muerte_Dragons=pygame.sprite.Group()
+    #muerte_Dragons.add(muerte_Dragon1)
+    #Tirar_Fuego=pygame.sprite.Group()
     Estrella=pygame.sprite.Group()
     Jugadores=pygame.sprite.Group()
     Jugadores.add(feca)
@@ -69,12 +69,12 @@ if __name__=='__main__':
     gru_Vidas_juego=pygame.sprite.Group
     Gro_Vidas=pygame.sprite.Group()
     Gro_Vidas.add(Aum_vida)
-    todos.add(muerte_Dragon1)
+    #todos.add(muerte_Dragon1)
     todos.add(Aum_vida)
     todos.add(Feca_vidas)
     todos.add(feca)
     #todos.add(Pocahontas)
-    todos.add(Dragon)
+    #todos.add(Dragon)
     Bloqueadores=pygame.sprite.Group()
     enemigos=pygame.sprite.Group()
     princes=pygame.sprite.Group()
@@ -212,9 +212,9 @@ if __name__=='__main__':
         enemigos.add(fantasmasVarios)
         todos.add(fantasmasVarios)
 
-    if(parar== False):
-        MovimientoDragon= Dragon.rect.x
-        parar=True
+    #if(parar== False):
+    #    MovimientoDragon= Dragon.rect.x
+    #    parar=True
 
     fin= False
     colorear= 1
@@ -232,7 +232,7 @@ if __name__=='__main__':
                     #if feca.var_x == 0:
                     feca.var_x=5
                     #feca.var_y=0
-                    #feca.dir=2
+                    feca.dir=1
                     #Pocahontas.dir=3
                 if event.key == pygame.K_w:
                     if feca.rect.y==640:
@@ -249,7 +249,7 @@ if __name__=='__main__':
                 if event.key == pygame.K_SPACE:
                     feca.var_x=0
                     feca.var_y=0
-                    Pocahontas.dir=2
+                    #Pocahontas.dir=2
                 if event.key == pygame.K_p:
                     ContadorMap+=2
                     if feca.dir == 0:
@@ -355,51 +355,19 @@ if __name__=='__main__':
                     colorear=3
 
 
-                    #screen.blit(image,(0,0))
-                    #fin=True
-    #MovimientoDragon
+            #for J in Jugadores:
+            #    ls_choque=pygame.sprite.spritecollide(J,Tirar_Fuego,False)
+            #    for T in ls_choque:
+            #        Nro_VIDAS-=1
+            #        todos.remove(T)
+            #        Tirar_Fuego.remove(T)
 
-#           if ( MovimientoDragon-250 == Dragon.rect.x):
-#                Fuego_Drago=FuncionesTerreno.Recortar('Fuego_Dragon.png',50,29)
-#                Dragon_Fuego=Fuego.Fuego_Dragons(Fuego_Drago[0][0])
-#                Dragon_Fuego.rect.x=Dragon.rect.x
-#                Dragon.var_x=2
-#                Dragon.dir=0
-#                Dragon.image=Dragon1[0+Dragon.con][Dragon.dir]
-#                Tirar_Fuego.add(Dragon_Fuego)
-#                todos.add(Dragon_Fuego)
-#            if (MovimientoDragon == Dragon.rect.x ):
-#                Fuego_Drago=FuncionesTerreno.Recortar('Fuego_Dragon.png',50,29)
-#                Dragon_Fuego=Fuego.Fuego_Dragons(Fuego_Drago[0][0])
-#                Dragon_Fuego.rect.x=Dragon.rect.x
-#                Tirar_Fuego.add(Dragon_Fuego)
-#                todos.add(Dragon_Fuego)
-#                Dragon.image=Dragon1[0+Dragon.con][Dragon.dir]
-#                Dragon.var_x=-2
-#                Dragon.dir=1
-#            if (MovimientoDragon-100 == Dragon.rect.x ):
-#                Fuego_Drago=FuncionesTerreno.Recortar('Fuego_Dragon.png',50,29)
-#                Dragon_Fuego=Fuego.Fuego_Dragons(Fuego_Drago[0][0])
-#                Dragon_Fuego.rect.x=Dragon.rect.x
-#                Dragon.image=Dragon1[0+Dragon.con][Dragon.dir]
-#                Tirar_Fuego.add(Dragon_Fuego)
-#                todos.add(Dragon_Fuego)
-#                Dragon.var_x=-2
-#                Dragon.dir=2
-
-            for J in Jugadores:
-                ls_choque=pygame.sprite.spritecollide(J,Tirar_Fuego,False)
-                for T in ls_choque:
-                    Nro_VIDAS-=1
-                    todos.remove(T)
-                    Tirar_Fuego.remove(T)
-
-            for J in Jugadores:
-                ls_choque=pygame.sprite.spritecollide(J,muerte_Dragons,False)
-                for T in ls_choque:
-                    Dragon.image=Dragon1[0+Dragon.con][3]
-                    Dragon.var_x=0
-                    Dragon.var_y=-10
+            #for J in Jugadores:
+            #    ls_choque=pygame.sprite.spritecollide(J,muerte_Dragons,False)
+            #    for T in ls_choque:
+            #        Dragon.image=Dragon1[0+Dragon.con][3]
+            #        Dragon.var_x=0
+            #        Dragon.var_y=-10
 
 
             if Nro_VIDAS == 5:
@@ -416,28 +384,7 @@ if __name__=='__main__':
 
 
             #Pocahontas.image=Princesa1[0+Pocahontas.con][Pocahontas.dir]
-            #feca.image=animal[feca.con][feca.dir]  Para cambiar cuando este cambiando la imgane de pucca
-
-
-            #ContadorMap+=1
-            #carga o refresco
-
-#            varia=0
-#            if varia == 0:
-#                vary=0
-#                varia+=1
-#
-#            for fila in mapa:
-#                varx=0
-#                for div in fila:
-#                    px=int (interprete.get(div,"x"))
-#                    py=int (interprete.get(div,"y"))
-#                    pantalla.blit(fondo[px][py], (varx,vary))
-#                    varx+=an
-#                vary+=al
-
-
-
+            feca.image=animal[feca.dir][0]
 
 
 
@@ -447,11 +394,8 @@ if __name__=='__main__':
                 pos_f-=6
             if pos_f>=0 and pos_f < (dim_fondoPriN.width - ANCHO):
                 ventana=fondoPriN.subsurface(pos_f,0, ANCHO, ALTO)
-                #print pos_x
             pantalla.blit(ventana, (0,0))
 
-
-            print Nro_VIDAS
 
             todos.update()
             todos.draw(pantalla)

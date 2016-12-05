@@ -10,7 +10,7 @@ class Jugador(pygame.sprite.Sprite):
         self.var_x=0
         self.var_y=0
         self.con=0
-        self.dir=2
+        self.dir=0
         self.DetecionHueco=False
         self.Vida=5
 
@@ -35,3 +35,7 @@ class Jugador(pygame.sprite.Sprite):
             self.rect.left=0
             self.var_x=0
         self.rect.y+=self.var_y
+        if self.dir<2:
+            self.dir+=1
+        else:
+            self.dir=0
