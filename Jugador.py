@@ -35,7 +35,7 @@ class Jugador(pygame.sprite.Sprite):
             self.rect.left=0
             self.var_x=0
         self.rect.y+=self.var_y
-        if self.dir<2:
+        if self.dir<4:
             self.dir+=1
         else:
             self.dir=0

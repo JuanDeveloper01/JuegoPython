@@ -41,7 +41,7 @@ if __name__=='__main__':
     ventana=fondoPriN.subsurface(0,0, ANCHO, ALTO)
     var_f=0
     pos_f=0
-    animal=FuncionesTerreno.Recortar('feca.png',60,64)
+    animal=FuncionesTerreno.Recortar('feca.png',62,64)
     feca=Jugador.Jugador(animal[0][0])
     #Princesa
     #Princesa1=FuncionesTerreno.Recortar('Princesa.png',64,64)
@@ -62,15 +62,15 @@ if __name__=='__main__':
     Vidas_feca=FuncionesTerreno.Recortar('vidas.png',50,50)
     Feca_vidas=Vidas.Vida(Vidas_feca[0][0])
 
-    Vida_j=FuncionesTerreno.Recortar('Vidas_juego.png',50,35)
-    Aum_vida=vidas_Juego.Vid_juego(Vida_j[0][0])
+    #Vida_j=FuncionesTerreno.Recortar('Vidas_juego.png',50,35)
+    #Aum_vida=vidas_Juego.Vid_juego(Vida_j[0][0])
 
 
     gru_Vidas_juego=pygame.sprite.Group
     Gro_Vidas=pygame.sprite.Group()
-    Gro_Vidas.add(Aum_vida)
+    #Gro_Vidas.add(Aum_vida)
     #todos.add(muerte_Dragon1)
-    todos.add(Aum_vida)
+    #todos.add(Aum_vida)
     todos.add(Feca_vidas)
     todos.add(feca)
     #todos.add(Pocahontas)
@@ -185,7 +185,7 @@ if __name__=='__main__':
 
     pos_X = 0
 # aumentar vidas en el juego
-    for i in range(15):
+    for i in range(5):
         Vida_j=FuncionesTerreno.Recortar('Vidas_juego.png',50,35)
         Aum_vida=vidas_Juego.Vid_juego(Vida_j[0][0])
         pos_X = random.randrange(5,15000)
@@ -197,16 +197,16 @@ if __name__=='__main__':
         todos.add(Aum_vida)
 
     #numero de fantasmas
-    for i in range(0):
+    for i in range(15):
         fantasmasVarios1=FuncionesTerreno.Recortar('Fantasmas1.png',64,64)
         fantasmasVarios=Enemigo.Enemigo(fantasmasVarios1[0][1])
-        pos_X = random.randrange(5,1100)
+        pos_X = random.randrange(5,15000)
         if(pos_X % 2 == 0):
             fantasmasVarios.rect.x= pos_X
-            fantasmasVarios.rect.y=random.randrange(59,600)
+            fantasmasVarios.rect.y=random.randrange(610,640)
         else:
             fantasmasVarios.rect.x= pos_X + 1
-            fantasmasVarios.rect.y=random.randrange(59,600)
+            fantasmasVarios.rect.y=random.randrange(610,640)
         fantasmasVarios.var_x=-2
         #fantasmasVarios.var_y=1
         enemigos.add(fantasmasVarios)
@@ -224,32 +224,21 @@ if __name__=='__main__':
                 fin=True
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_a:
+                    feca.con=1
                     feca.var_x=-5
-                    #feca.var_y=0
-                    #feca.dir=1
-                    #Pocahontas.dir=1
                 if event.key == pygame.K_d:
-                    #if feca.var_x == 0:
                     feca.var_x=5
-                    #feca.var_y=0
+                    feca.con=0
                     feca.dir=1
-                    #Pocahontas.dir=3
                 if event.key == pygame.K_w:
                     if feca.rect.y==640:
-                    #if feca.rect.x == 0:
-                        feca.rect.y += -10
+                        feca.rect.y +=-10
                         feca.var_y=-16
-                    #feca.dir=3
-                    #Pocahontas.dir=2
                 if event.key == pygame.K_s:
-                    #feca.var_y=3
-                    #feca.var_x=0
                     feca.dir=0
-                    #Pocahontas.dir=3
                 if event.key == pygame.K_SPACE:
                     feca.var_x=0
                     feca.var_y=0
-                    #Pocahontas.dir=2
                 if event.key == pygame.K_p:
                     ContadorMap+=2
                     if feca.dir == 0:
@@ -312,6 +301,8 @@ if __name__=='__main__':
         for JUG in Jugadores:
             ls_choque=pygame.sprite.spritecollide(JUG,Bloqueadores,False)
             for b in ls_choque:
+                todos.remove(b)
+                Bloqueadores.remove(b)
                 Nro_VIDAS-=1
 
         if colorear == 1:
@@ -332,14 +323,9 @@ if __name__=='__main__':
                         todos.remove(im)
 
             for Ene in enemigos:
-                if ( 2 == Ene.rect.x):
-                    Ene.var_x=2
-                    Ene.dir=2
-                    Ene.image=fantasmasVarios1[Ene.con][Ene.dir]
-                if (1000 == Ene.rect.x ):
-                    Ene.var_x=-2
-                    Ene.dir=1
-                    Ene.image=fantasmasVarios1[Ene.con][Ene.dir]
+                if ( 2 == Ene.rect.x or 1 == Ene.rect.x or  0== Ene.rect.x ):
+                    enemigos.remove(Ene)
+                    todos.remove(Ene)
 
 
             image=pygame.image.load("gameover.jpg")
@@ -384,7 +370,7 @@ if __name__=='__main__':
 
 
             #Pocahontas.image=Princesa1[0+Pocahontas.con][Pocahontas.dir]
-            feca.image=animal[feca.dir][0]
+            feca.image=animal[feca.dir][feca.con]
 
 
 
