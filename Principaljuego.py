@@ -20,6 +20,7 @@ ContadorMap=0
 ANCHO=1344
 ALTO=704
 Nro_VIDAS=5
+listaBlo=[]
 
 if __name__=='__main__':
     pygame.init()
@@ -35,13 +36,13 @@ if __name__=='__main__':
     todos=pygame.sprite.Group()
     #jugador
     #Fondodel nivel
-    fondoPriN=pygame.image.load('Fondonivel1V.jpg')
+    fondoPriN=pygame.image.load('Fondonivel1.jpg')
     dim_fondoPriN=fondoPriN.get_rect()
     ventana=fondoPriN.subsurface(0,0, ANCHO, ALTO)
     var_f=0
     pos_f=0
-    animal=FuncionesTerreno.Recortar('feca.png',64,64)
-    feca=Jugador.Jugador(animal[0][2])
+    animal=FuncionesTerreno.Recortar('feca.png',60,64)
+    feca=Jugador.Jugador(animal[0][0])
     #Princesa
     Princesa1=FuncionesTerreno.Recortar('Princesa.png',64,64)
     Pocahontas=Princesa.Princesa(Princesa1[0][2])
@@ -61,7 +62,7 @@ if __name__=='__main__':
     Vidas_feca=FuncionesTerreno.Recortar('vidas.png',50,50)
     Feca_vidas=Vidas.Vida(Vidas_feca[0][0])
 
-    Vida_j=FuncionesTerreno.Recortar('Vidas_juego.png',25,21)
+    Vida_j=FuncionesTerreno.Recortar('Vidas_juego.png',50,35)
     Aum_vida=vidas_Juego.Vid_juego(Vida_j[0][0])
 
 
@@ -161,10 +162,14 @@ if __name__=='__main__':
             px=int (interprete.get(div,"x"))
             py=int (interprete.get(div,"y"))
             if(div == "#"):#lo cambie para hacer la prueba ojo
-                Bloquea=FuncionesTerreno.Recortar('terrenogen.png',32,32)
-                Bloquear=Bloques.Bloque(Bloquea[8][6])
+                Bloquea=FuncionesTerreno.Recortar('terrenogen.png',54,180)
+                Bloquear=Bloques.Bloque(Bloquea[0][0])
                 Bloquear.rect.x = varx
                 Bloquear.rect.y = vary
+                #if feca.rect.x>=100:
+                Bloquear.var_x=-0.1
+                #if feca.rect.x<100:
+                #Bloquear.var_x=0.1
                 Bloqueadores.add(Bloquear)
                 todos.add(Bloquear)
             if(div == "H"):
@@ -180,15 +185,16 @@ if __name__=='__main__':
 
 
 
-
     pos_X = 0
 # aumentar vidas en el juego
-    for i in range(3):
-        Vida_j=FuncionesTerreno.Recortar('Vidas_juego.png',25,21)
+    for i in range(15):
+        Vida_j=FuncionesTerreno.Recortar('Vidas_juego.png',50,35)
         Aum_vida=vidas_Juego.Vid_juego(Vida_j[0][0])
-        pos_X = random.randrange(5,1100)
+        pos_X = random.randrange(5,15000)
         Aum_vida.rect.x=pos_X
-        Aum_vida.rect.y=random.randrange(59,600)
+        Aum_vida.var_x=-2
+        Aum_vida.rect.y=random.randrange(540,640)
+
         Gro_Vidas.add(Aum_vida)
         todos.add(Aum_vida)
 
@@ -225,15 +231,17 @@ if __name__=='__main__':
                     #feca.dir=1
                     #Pocahontas.dir=1
                 if event.key == pygame.K_d:
-                    if feca.var_x == 0:
-                        feca.var_x=5
+                    #if feca.var_x == 0:
+                    feca.var_x=5
                     #feca.var_y=0
                     #feca.dir=2
                     #Pocahontas.dir=3
                 if event.key == pygame.K_w:
+                    print feca.rect.y
+                    if feca.rect.y==640:
                     #if feca.rect.x == 0:
-                    feca.rect.y += -1
-                    feca.var_y=-5
+                        feca.rect.y += -10
+                        feca.var_y=-16
                     #feca.dir=3
                     #Pocahontas.dir=2
                 if event.key == pygame.K_s:
@@ -296,20 +304,29 @@ if __name__=='__main__':
                 todos.remove(E)
                 enemigos.remove(E)
 
+        for Elimino in Bloqueadores:
+            print Elimino.rect.x
+            if Elimino.rect.x==0:
+                todos.remove(Elimino)
+                Bloqueadores.remove(Elimino)
 
 
 
         for JUG in Jugadores:
             ls_choque=pygame.sprite.spritecollide(JUG,Bloqueadores,False)
+            #listaBlo=pygame.sprite.spritecollide(JUG,Bloqueadores,False)
             #JUG.rect.x+=JUG.var_x
             #JUG.rect.y+=JUG.var_y
             for b in ls_choque:
                 if JUG.var_x>0:
                     JUG.var_x=0
-                    JUG.rect.right=b.rect.left
+                    JUG.var_x=2
+                    #JUG.var_y=0
+                    JUG.rect.left=b.rect.right
                 if JUG.var_x<0:
                     JUG.rect.left=b.rect.right
                     JUG.var_x=0
+                    JUG.var_x=-2
                 if JUG.var_y>0:
                     JUG.rect.bottom=b.rect.top
                     JUG.var_y=0
@@ -421,7 +438,8 @@ if __name__=='__main__':
 
 
             #Pocahontas.image=Princesa1[0+Pocahontas.con][Pocahontas.dir]
-            feca.image=animal[feca.con][feca.dir]
+            #feca.image=animal[feca.con][feca.dir]  Para cambiar cuando este cambiando la imgane de pucca
+
 
             #ContadorMap+=1
             #carga o refresco
@@ -439,9 +457,9 @@ if __name__=='__main__':
                     varx+=an
                 vary+=al
 
-            if feca.rect.right >= ANCHO-100:
+            if feca.rect.right >=100:
                 pos_f+=5
-            if feca.rect.left <=100:
+            if feca.rect.left <100:
                 pos_f-=5
             if pos_f>=0 and pos_f < (dim_fondoPriN.width - ANCHO):
                 ventana=fondoPriN.subsurface(pos_f,0, ANCHO, ALTO)

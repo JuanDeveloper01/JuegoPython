@@ -17,9 +17,9 @@ class Jugador(pygame.sprite.Sprite):
 
     def gravedad(self):
         if self.var_y ==0:
-            self.var_y =1
+            self.var_y =0.2
         else:
-            self.var_y+=0.35
+            self.var_y+=1
 
         if self.rect.y >= (704)-self.rect.height:
             self.rect.bottom = (704)
