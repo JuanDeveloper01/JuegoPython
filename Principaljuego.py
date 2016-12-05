@@ -192,7 +192,7 @@ if __name__=='__main__':
         Aum_vida=vidas_Juego.Vid_juego(Vida_j[0][0])
         pos_X = random.randrange(5,15000)
         Aum_vida.rect.x=pos_X
-        Aum_vida.var_x=-2
+        Aum_vida.var_x=-1.5
         Aum_vida.rect.y=random.randrange(540,640)
 
         Gro_Vidas.add(Aum_vida)
@@ -237,7 +237,6 @@ if __name__=='__main__':
                     #feca.dir=2
                     #Pocahontas.dir=3
                 if event.key == pygame.K_w:
-                    print feca.rect.y
                     if feca.rect.y==640:
                     #if feca.rect.x == 0:
                         feca.rect.y += -10
@@ -254,6 +253,7 @@ if __name__=='__main__':
                     feca.var_y=0
                     Pocahontas.dir=2
                 if event.key == pygame.K_p:
+                    ContadorMap+=2
                     if feca.dir == 0:
                         b=Bala_Defen.Bala('Estrellaninja2.png')
                         b.rect.x=feca.rect.x
@@ -262,7 +262,7 @@ if __name__=='__main__':
                         b.var_y=10
                         Estrella.add(b)
                         todos.add(b)
-                        ContadorMap+=32
+                        #ContadorMap+=32
                     if feca.dir == 1:
                         b=Bala_Defen.Bala('Estrellaninja2.png')
                         b.rect.x=feca.rect.x
@@ -305,7 +305,6 @@ if __name__=='__main__':
                 enemigos.remove(E)
 
         for Elimino in Bloqueadores:
-            print Elimino.rect.x
             if Elimino.rect.x==0:
                 todos.remove(Elimino)
                 Bloqueadores.remove(Elimino)
@@ -314,9 +313,6 @@ if __name__=='__main__':
 
         for JUG in Jugadores:
             ls_choque=pygame.sprite.spritecollide(JUG,Bloqueadores,False)
-            #listaBlo=pygame.sprite.spritecollide(JUG,Bloqueadores,False)
-            #JUG.rect.x+=JUG.var_x
-            #JUG.rect.y+=JUG.var_y
             for b in ls_choque:
                 if JUG.var_x>0:
                     JUG.var_x=0
@@ -381,7 +377,7 @@ if __name__=='__main__':
                     #fin=True
     #MovimientoDragon
 
-#            if ( MovimientoDragon-250 == Dragon.rect.x):
+#           if ( MovimientoDragon-250 == Dragon.rect.x):
 #                Fuego_Drago=FuncionesTerreno.Recortar('Fuego_Dragon.png',50,29)
 #                Dragon_Fuego=Fuego.Fuego_Dragons(Fuego_Drago[0][0])
 #                Dragon_Fuego.rect.x=Dragon.rect.x
@@ -443,29 +439,39 @@ if __name__=='__main__':
 
             #ContadorMap+=1
             #carga o refresco
-            varia=0
-            if varia == 0:
-                vary=0
-                varia+=1
 
-            for fila in mapa:
-                varx=0-ContadorMap
-                for div in fila:
-                    px=int (interprete.get(div,"x"))
-                    py=int (interprete.get(div,"y"))
-                    pantalla.blit(fondo[px][py], (varx,vary))
-                    varx+=an
-                vary+=al
+#            varia=0
+#            if varia == 0:
+#                vary=0
+#                varia+=1
+#
+#            for fila in mapa:
+#                varx=0
+#                for div in fila:
+#                    px=int (interprete.get(div,"x"))
+#                    py=int (interprete.get(div,"y"))
+#                    pantalla.blit(fondo[px][py], (varx,vary))
+#                    varx+=an
+#                vary+=al
+
+
+
+
+
 
             if feca.rect.right >=100:
+                ContadorMap+=5
                 pos_f+=5
             if feca.rect.left <100:
+                ContadorMap-=5
                 pos_f-=5
             if pos_f>=0 and pos_f < (dim_fondoPriN.width - ANCHO):
                 ventana=fondoPriN.subsurface(pos_f,0, ANCHO, ALTO)
                 #print pos_x
             pantalla.blit(ventana, (0,0))
 
+
+            print Nro_VIDAS
 
             todos.update()
             todos.draw(pantalla)
