@@ -166,17 +166,15 @@ if __name__=='__main__':
                 Bloquear=Bloques.Bloque(Bloquea[0][0])
                 Bloquear.rect.x = varx
                 Bloquear.rect.y = vary
-                #if feca.rect.x>=100:
-                Bloquear.var_x=-0.1
-                #if feca.rect.x<100:
-                #Bloquear.var_x=0.1
+                Bloquear.var_x=-5
                 Bloqueadores.add(Bloquear)
                 todos.add(Bloquear)
             if(div == "H"):
-                Hueco=FuncionesTerreno.Recortar('terrenogen.png',32,32)
-                Caer=Huecos.Hueco(Hueco[19][11])
+                Hueco=FuncionesTerreno.Recortar('terrenogen.png',60,32)
+                Caer=Huecos.Hueco(Hueco[1][0])
                 Caer.rect.x = varx
                 Caer.rect.y = vary
+                Caer.var_x=-5
                 Caidas.add(Caer)
                 todos.add(Caer)
             pantalla.blit(fondo[px][py], (varx,vary))
@@ -314,23 +312,7 @@ if __name__=='__main__':
         for JUG in Jugadores:
             ls_choque=pygame.sprite.spritecollide(JUG,Bloqueadores,False)
             for b in ls_choque:
-                if JUG.var_x>0:
-                    JUG.var_x=0
-                    JUG.var_x=2
-                    #JUG.var_y=0
-                    JUG.rect.left=b.rect.right
-                if JUG.var_x<0:
-                    JUG.rect.left=b.rect.right
-                    JUG.var_x=0
-                    JUG.var_x=-2
-                if JUG.var_y>0:
-                    JUG.rect.bottom=b.rect.top
-                    JUG.var_y=0
-                if JUG.var_y<0:
-                    #JUG.con=0
-                    JUG.rect.top=b.rect.bottom
-                    JUG.var_y=0
-
+                Nro_VIDAS-=1
 
         if colorear == 1:
             #estrellas nijas
@@ -460,11 +442,9 @@ if __name__=='__main__':
 
 
             if feca.rect.right >=100:
-                ContadorMap+=5
-                pos_f+=5
+                pos_f+=6
             if feca.rect.left <100:
-                ContadorMap-=5
-                pos_f-=5
+                pos_f-=6
             if pos_f>=0 and pos_f < (dim_fondoPriN.width - ANCHO):
                 ventana=fondoPriN.subsurface(pos_f,0, ANCHO, ALTO)
                 #print pos_x
