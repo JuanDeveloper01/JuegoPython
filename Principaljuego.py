@@ -43,38 +43,16 @@ if __name__=='__main__':
     pos_f=0
     animal=FuncionesTerreno.Recortar('feca.png',62,64)
     feca=Jugador.Jugador(animal[0][0])
-    #Princesa
-    #Princesa1=FuncionesTerreno.Recortar('Princesa.png',64,64)
-    #Pocahontas=Princesa.Princesa(Princesa1[0][2])
-    #Dragon
-    #Dragon1=FuncionesTerreno.Recortar('Dragon1.png',80,80)
-    #Dragon=Enemigo.Enemigo(Dragon1[0][0])
-
-    #Me_Dragon=FuncionesTerreno.Recortar('Muerte_Dragon.png',50,50)
-    #muerte_Dragon1=muerte_Dragon.Muerte(Me_Dragon[0][0])
-
-    #muerte_Dragons=pygame.sprite.Group()
-    #muerte_Dragons.add(muerte_Dragon1)
-    #Tirar_Fuego=pygame.sprite.Group()
     Estrella=pygame.sprite.Group()
     Jugadores=pygame.sprite.Group()
     Jugadores.add(feca)
     Vidas_feca=FuncionesTerreno.Recortar('vidas.png',50,50)
     Feca_vidas=Vidas.Vida(Vidas_feca[0][0])
 
-    #Vida_j=FuncionesTerreno.Recortar('Vidas_juego.png',50,35)
-    #Aum_vida=vidas_Juego.Vid_juego(Vida_j[0][0])
-
-
     gru_Vidas_juego=pygame.sprite.Group
     Gro_Vidas=pygame.sprite.Group()
-    #Gro_Vidas.add(Aum_vida)
-    #todos.add(muerte_Dragon1)
-    #todos.add(Aum_vida)
     todos.add(Feca_vidas)
     todos.add(feca)
-    #todos.add(Pocahontas)
-    #todos.add(Dragon)
     Bloqueadores=pygame.sprite.Group()
     enemigos=pygame.sprite.Group()
     princes=pygame.sprite.Group()
@@ -197,16 +175,16 @@ if __name__=='__main__':
         todos.add(Aum_vida)
 
     #numero de fantasmas
-    for i in range(15):
-        fantasmasVarios1=FuncionesTerreno.Recortar('Fantasmas1.png',64,64)
-        fantasmasVarios=Enemigo.Enemigo(fantasmasVarios1[0][1])
-        pos_X = random.randrange(5,15000)
+    for i in range(5):
+        fantasmasVarios1=FuncionesTerreno.Recortar('Ninja.png',120,120)
+        fantasmasVarios=Enemigo.Enemigo(fantasmasVarios1[0][0])
+        pos_X = random.randrange(5,1344)
         if(pos_X % 2 == 0):
             fantasmasVarios.rect.x= pos_X
-            fantasmasVarios.rect.y=random.randrange(610,640)
+            fantasmasVarios.rect.y=random.randrange(550,600)
         else:
             fantasmasVarios.rect.x= pos_X + 1
-            fantasmasVarios.rect.y=random.randrange(610,640)
+            fantasmasVarios.rect.y=random.randrange(550,600)
         fantasmasVarios.var_x=-2
         #fantasmasVarios.var_y=1
         enemigos.add(fantasmasVarios)
@@ -341,19 +319,6 @@ if __name__=='__main__':
                     colorear=3
 
 
-            #for J in Jugadores:
-            #    ls_choque=pygame.sprite.spritecollide(J,Tirar_Fuego,False)
-            #    for T in ls_choque:
-            #        Nro_VIDAS-=1
-            #        todos.remove(T)
-            #        Tirar_Fuego.remove(T)
-
-            #for J in Jugadores:
-            #    ls_choque=pygame.sprite.spritecollide(J,muerte_Dragons,False)
-            #    for T in ls_choque:
-            #        Dragon.image=Dragon1[0+Dragon.con][3]
-            #        Dragon.var_x=0
-            #        Dragon.var_y=-10
 
 
             if Nro_VIDAS == 5:
@@ -368,9 +333,9 @@ if __name__=='__main__':
                 Feca_vidas.image=Vidas_feca[0+Feca_vidas.con][4]
                 colorear=0
 
-
-            #Pocahontas.image=Princesa1[0+Pocahontas.con][Pocahontas.dir]
             feca.image=animal[feca.dir][feca.con]
+            #fantasmasVarios.image=[fantasmasVarios.dir][fantasmasVarios.con]
+
 
 
 

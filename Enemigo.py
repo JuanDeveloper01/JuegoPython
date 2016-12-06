@@ -23,3 +23,7 @@ class Enemigo(pygame.sprite.Sprite):
         if self.tiempo==0:
             self.disparar=True
             self.tiempo=random.randrange(20)
+        if self.con<7:
+            self.con+=1
+        else:
+            self.con=0
