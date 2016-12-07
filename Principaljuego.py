@@ -41,23 +41,23 @@ if __name__=='__main__':
     ventana=fondoPriN.subsurface(0,0, ANCHO, ALTO)
     var_f=0
     pos_f=0
-    animal=FuncionesTerreno.Recortar('feca.png',62,64)
-    feca=Jugador.Jugador(animal[0][0])
+    animal=FuncionesTerreno.Recortar('pucca.png',62,66)
+    pucca=Jugador.Jugador(animal[0][0])
     Estrella=pygame.sprite.Group()
     Jugadores=pygame.sprite.Group()
-    Jugadores.add(feca)
-    Vidas_feca=FuncionesTerreno.Recortar('vidas.png',50,50)
-    Feca_vidas=Vidas.Vida(Vidas_feca[0][0])
+    Jugadores.add(pucca)
+    Vidas_pucca=FuncionesTerreno.Recortar('vidas.png',50,50)
+    pucca_vidas=Vidas.Vida(Vidas_pucca[0][0])
 
     gru_Vidas_juego=pygame.sprite.Group
     Gro_Vidas=pygame.sprite.Group()
-    todos.add(Feca_vidas)
-    todos.add(feca)
+    todos.add(pucca_vidas)
+    todos.add(pucca)
     Bloqueadores=pygame.sprite.Group()
     enemigos=pygame.sprite.Group()
     princes=pygame.sprite.Group()
     Caidas=pygame.sprite.Group()
-    feca.Bloqueadores=Bloqueadores
+    pucca.Bloqueadores=Bloqueadores
     #princes.add(Pocahontas)
 #Fuentes
     fuente=pygame.font.SysFont("comicsansms",66) #Fuente para hacer el letrero(tipo de letra, tamano).
@@ -88,17 +88,17 @@ if __name__=='__main__':
 
         if pag == 1:
             pantalla.fill(Colores.eColor("BLANCO"))
-            texto=fuente2.render("En una tierra muy lejana existia un gran guerrero de clase feca, Su nombre era .. LEYENDA ..", True, Colores.eColor("NEGRO")) #Lo que hay en el letrero.
+            texto=fuente2.render("En una tierra muy lejana existia un gran guerrero de clase pucca, Su nombre era .. LEYENDA ..", True, Colores.eColor("NEGRO")) #Lo que hay en el letrero.
             pantalla.blit(texto,[10,10]) #Posicion del letrero
-            imagen=pygame.image.load('MunecoFeca2.png')
+            imagen=pygame.image.load('Munecopucca2.png')
             pantalla.blit(imagen, [20, 20])
             pygame.display.flip()
 
         if pag == 2:
             pantalla.fill(Colores.eColor("BLANCO"))
-            texto=fuente2.render("En una tierra muy lejana existia un gran guerrero de clase feca, Su nombre era .. LEYENDA ..", True, Colores.eColor("NEGRO")) #Lo que hay en el letrero.
+            texto=fuente2.render("En una tierra muy lejana existia un gran guerrero de clase pucca, Su nombre era .. LEYENDA ..", True, Colores.eColor("NEGRO")) #Lo que hay en el letrero.
             pantalla.blit(texto,[10,10]) #Posicion del letrero
-            imagen=pygame.image.load('MunecoFeca2.png')
+            imagen=pygame.image.load('Munecopucca2.png')
             pantalla.blit(imagen, [20, 20])
             texto=fuente2.render("El cual tenia un amigo fiel llamado .. DRAGOPAVO ..", True, Colores.eColor("NEGRO")) #Lo que hay en el letrero.
             pantalla.blit(texto,[500,100]) #Posicion del letrero
@@ -108,9 +108,9 @@ if __name__=='__main__':
 
         if pag == 3:
             pantalla.fill(Colores.eColor("BLANCO"))
-            texto=fuente2.render("En una tierra muy lejana existia un gran guerrero de clase feca, Su nombre era .. LEYENDA ..", True, Colores.eColor("NEGRO")) #Lo que hay en el letrero.
+            texto=fuente2.render("En una tierra muy lejana existia un gran guerrero de clase pucca, Su nombre era .. LEYENDA ..", True, Colores.eColor("NEGRO")) #Lo que hay en el letrero.
             pantalla.blit(texto,[10,10]) #Posicion del letrero
-            imagen=pygame.image.load('MunecoFeca2.png')
+            imagen=pygame.image.load('Munecopucca2.png')
             pantalla.blit(imagen, [20, 20])
             texto=fuente2.render("El cual tenia un amigo fiel llamado .. DRAGOPAVO ..", True, Colores.eColor("NEGRO")) #Lo que hay en el letrero.
             pantalla.blit(texto,[500,100]) #Posicion del letrero
@@ -144,7 +144,7 @@ if __name__=='__main__':
                 Bloquear=Bloques.Bloque(Bloquea[0][0])
                 Bloquear.rect.x = varx
                 Bloquear.rect.y = vary
-                Bloquear.var_x=-5
+                Bloquear.var_x=-1.5
                 Bloqueadores.add(Bloquear)
                 todos.add(Bloquear)
             if(div == "H"):
@@ -152,7 +152,7 @@ if __name__=='__main__':
                 Caer=Huecos.Hueco(Hueco[1][0])
                 Caer.rect.x = varx
                 Caer.rect.y = vary
-                Caer.var_x=-5
+                Caer.var_x=-1.5
                 Caidas.add(Caer)
                 todos.add(Caer)
             pantalla.blit(fondo[px][py], (varx,vary))
@@ -163,10 +163,10 @@ if __name__=='__main__':
 
     pos_X = 0
 # aumentar vidas en el juego
-    for i in range(5):
+    for i in range(15):
         Vida_j=FuncionesTerreno.Recortar('Vidas_juego.png',50,35)
         Aum_vida=vidas_Juego.Vid_juego(Vida_j[0][0])
-        pos_X = random.randrange(5,15000)
+        pos_X = random.randrange(5,10000)
         Aum_vida.rect.x=pos_X
         Aum_vida.var_x=-1.5
         Aum_vida.rect.y=random.randrange(540,640)
@@ -176,19 +176,14 @@ if __name__=='__main__':
 
     #numero de fantasmas
     for i in range(5):
-        fantasmasVarios1=FuncionesTerreno.Recortar('Ninja.png',120,120)
-        fantasmasVarios=Enemigo.Enemigo(fantasmasVarios1[0][0])
-        pos_X = random.randrange(5,1344)
-        if(pos_X % 2 == 0):
-            fantasmasVarios.rect.x= pos_X
-            fantasmasVarios.rect.y=random.randrange(550,600)
-        else:
-            fantasmasVarios.rect.x= pos_X + 1
-            fantasmasVarios.rect.y=random.randrange(550,600)
-        fantasmasVarios.var_x=-2
-        #fantasmasVarios.var_y=1
-        enemigos.add(fantasmasVarios)
-        todos.add(fantasmasVarios)
+        NinjaVarios1=FuncionesTerreno.Recortar('Ninja.png',120,120)
+        NinjaVarios=Enemigo.Enemigo(NinjaVarios1[0][0])
+        pos_X = random.randrange(5,10044)
+        NinjaVarios.rect.x= pos_X
+        NinjaVarios.rect.y=random.randrange(550,600)
+        NinjaVarios.var_x=-2
+        enemigos.add(NinjaVarios)
+        todos.add(NinjaVarios)
 
     #if(parar== False):
     #    MovimientoDragon= Dragon.rect.x
@@ -202,52 +197,52 @@ if __name__=='__main__':
                 fin=True
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_a:
-                    feca.con=1
-                    feca.var_x=-5
+                    pucca.con=1
+                    pucca.var_x=-3
                 if event.key == pygame.K_d:
-                    feca.var_x=5
-                    feca.con=0
-                    feca.dir=1
+                    pucca.var_x=3
+                    pucca.con=0
+                    pucca.dir=1
                 if event.key == pygame.K_w:
-                    if feca.rect.y==640:
-                        feca.rect.y +=-10
-                        feca.var_y=-16
+                    if pucca.rect.y==638:
+                        pucca.rect.y +=-10
+                        pucca.var_y=-16
                 if event.key == pygame.K_s:
-                    feca.dir=0
+                    pucca.dir=0
                 if event.key == pygame.K_SPACE:
-                    feca.var_x=0
-                    feca.var_y=0
+                    pucca.var_x=0
+                    pucca.var_y=0
                 if event.key == pygame.K_p:
                     ContadorMap+=2
-                    if feca.dir == 0:
+                    if pucca.dir == 0:
                         b=Bala_Defen.Bala('Estrellaninja2.png')
-                        b.rect.x=feca.rect.x
-                        b.rect.y=feca.rect.y
+                        b.rect.x=pucca.rect.x
+                        b.rect.y=pucca.rect.y
                         b.var_x=0
                         b.var_y=10
                         Estrella.add(b)
                         todos.add(b)
                         #ContadorMap+=32
-                    if feca.dir == 1:
+                    if pucca.dir == 1:
                         b=Bala_Defen.Bala('Estrellaninja2.png')
-                        b.rect.x=feca.rect.x
-                        b.rect.y=feca.rect.y
+                        b.rect.x=pucca.rect.x
+                        b.rect.y=pucca.rect.y
                         b.var_x=-10
                         b.var_y=0
                         Estrella.add(b)
                         todos.add(b)
-                    if feca.dir == 2:
+                    if pucca.dir == 2:
                         b=Bala_Defen.Bala('Estrellaninja2.png')
-                        b.rect.x=feca.rect.x
-                        b.rect.y=feca.rect.y
+                        b.rect.x=pucca.rect.x
+                        b.rect.y=pucca.rect.y
                         b.var_x=10
                         b.var_y=0
                         Estrella.add(b)
                         todos.add(b)
-                    if feca.dir == 3:
+                    if pucca.dir == 3:
                         b=Bala_Defen.Bala('Estrellaninja2.png')
-                        b.rect.x=feca.rect.x
-                        b.rect.y=feca.rect.y
+                        b.rect.x=pucca.rect.x
+                        b.rect.y=pucca.rect.y
                         b.var_x=0
                         b.var_y=-10
                         Estrella.add(b)
@@ -322,26 +317,28 @@ if __name__=='__main__':
 
 
             if Nro_VIDAS == 5:
-                Feca_vidas.image=Vidas_feca[0+Feca_vidas.con][0]
+                pucca_vidas.image=Vidas_pucca[0+pucca_vidas.con][0]
             if Nro_VIDAS == 4:
-                Feca_vidas.image=Vidas_feca[0+Feca_vidas.con][1]
+                pucca_vidas.image=Vidas_pucca[0+pucca_vidas.con][1]
             if Nro_VIDAS == 3:
-                Feca_vidas.image=Vidas_feca[0+Feca_vidas.con][2]
+                pucca_vidas.image=Vidas_pucca[0+pucca_vidas.con][2]
             if Nro_VIDAS == 2:
-                Feca_vidas.image=Vidas_feca[0+Feca_vidas.con][3]
+                pucca_vidas.image=Vidas_pucca[0+pucca_vidas.con][3]
             if Nro_VIDAS == 1:
-                Feca_vidas.image=Vidas_feca[0+Feca_vidas.con][4]
+                pucca_vidas.image=Vidas_pucca[0+pucca_vidas.con][4]
                 colorear=0
 
-            feca.image=animal[feca.dir][feca.con]
-            #fantasmasVarios.image=[fantasmasVarios.dir][fantasmasVarios.con]
+            pucca.image=animal[pucca.dir][pucca.con]
+
+            for Ninja in enemigos:
+                Ninja.image=NinjaVarios1[NinjaVarios.dir][NinjaVarios.con]
 
 
 
 
-            if feca.rect.right >=100:
+            if pucca.rect.right >=100:
                 pos_f+=6
-            if feca.rect.left <100:
+            if pucca.rect.left <100:
                 pos_f-=6
             if pos_f>=0 and pos_f < (dim_fondoPriN.width - ANCHO):
                 ventana=fondoPriN.subsurface(pos_f,0, ANCHO, ALTO)

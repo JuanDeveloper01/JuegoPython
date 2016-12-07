@@ -13,7 +13,7 @@ class Enemigo(pygame.sprite.Sprite):
         self.disparar=False
         self.vida=2
         self.con=0
-        self.dir=1
+        self.dir=0
         self.tiempo=random.randrange(100)
 
     def update(self):
@@ -23,7 +23,7 @@ class Enemigo(pygame.sprite.Sprite):
         if self.tiempo==0:
             self.disparar=True
             self.tiempo=random.randrange(20)
-        if self.con<7:
-            self.con+=1
-        else:
-            self.con=0
+        if self.dir<=15:
+            self.dir+=1
+        if self.dir>15:
+            self.dir=0
