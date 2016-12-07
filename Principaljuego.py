@@ -20,7 +20,7 @@ ContadorMap=0
 ANCHO=1344
 ALTO=704
 Nro_VIDAS=5
-listaBlo=[]
+Presen=0
 
 if __name__=='__main__':
     pygame.init()
@@ -34,8 +34,6 @@ if __name__=='__main__':
     an=int (interprete.get("nivel","corte_ancho")) #Extraer el ancho de nivel
     fondo=FuncionesTerreno.Recortar(ar_origen,an,al)
     todos=pygame.sprite.Group()
-    #jugador
-    #Fondodel nivel
     fondoPriN=pygame.image.load('Fondonivel1.jpg')
     dim_fondoPriN=fondoPriN.get_rect()
     ventana=fondoPriN.subsurface(0,0, ANCHO, ALTO)
@@ -58,8 +56,6 @@ if __name__=='__main__':
     princes=pygame.sprite.Group()
     Caidas=pygame.sprite.Group()
     pucca.Bloqueadores=Bloqueadores
-    #princes.add(Pocahontas)
-#Fuentes
     fuente=pygame.font.SysFont("comicsansms",66) #Fuente para hacer el letrero(tipo de letra, tamano).
     fuente2=pygame.font.SysFont("comicsansms",36)
     fuente3=pygame.font.SysFont("comicsansms",26)
@@ -70,6 +66,9 @@ if __name__=='__main__':
     pag=0 #Pantallazos
     terminar=False
     parar=False
+    Inicio=pygame.mixer.Sound("CancioInicio.ogg")
+
+
 
     while not terminar:
         for event in pygame.event.get():
@@ -79,31 +78,26 @@ if __name__=='__main__':
                 pag+=1
 
         if pag == 0:
+            if Presen ==0:
+                    Inicio.play(loops=0)
+                    Presen=1
             pantalla.fill(Colores.eColor("BLANCO"))
-            imagen=pygame.image.load('dofus.png')
-            pantalla.blit(imagen, [50,50])
-            texto=fuente.render("BIENVENIDO AL MUNDO DE LOS DOCE...", True, Colores.eColor("VERDEBICHE")) #Lo que hay en el letrero.
+            imagen=pygame.image.load('Primero.jpg')
+            pantalla.blit(imagen, [150,50])
+            texto=fuente.render("TODOS LOS DERECHOS RESERVADOS...", True, Colores.eColor("ROJO")) #Lo que hay en el letrero.
             pantalla.blit(texto,[200,10]) #Posicion del letrero
             pygame.display.flip()
 
         if pag == 1:
             pantalla.fill(Colores.eColor("BLANCO"))
-            texto=fuente2.render("En una tierra muy lejana existia un gran guerrero de clase pucca, Su nombre era .. LEYENDA ..", True, Colores.eColor("NEGRO")) #Lo que hay en el letrero.
-            pantalla.blit(texto,[10,10]) #Posicion del letrero
-            imagen=pygame.image.load('Munecopucca2.png')
-            pantalla.blit(imagen, [20, 20])
+            imagen=pygame.image.load('segundo.png')
+            pantalla.blit(imagen, [0, 0])
             pygame.display.flip()
 
         if pag == 2:
             pantalla.fill(Colores.eColor("BLANCO"))
-            texto=fuente2.render("En una tierra muy lejana existia un gran guerrero de clase pucca, Su nombre era .. LEYENDA ..", True, Colores.eColor("NEGRO")) #Lo que hay en el letrero.
-            pantalla.blit(texto,[10,10]) #Posicion del letrero
-            imagen=pygame.image.load('Munecopucca2.png')
-            pantalla.blit(imagen, [20, 20])
-            texto=fuente2.render("El cual tenia un amigo fiel llamado .. DRAGOPAVO ..", True, Colores.eColor("NEGRO")) #Lo que hay en el letrero.
-            pantalla.blit(texto,[500,100]) #Posicion del letrero
-            imagen=pygame.image.load('Dragopavo.png')
-            pantalla.blit(imagen, [600, 300])
+            imagen=pygame.image.load('tercero.png')
+            pantalla.blit(imagen, [0, 0])
             pygame.display.flip()
 
         if pag == 3:
@@ -131,6 +125,7 @@ if __name__=='__main__':
             pantalla.blit(imagen, [0, 0])
             pygame.display.flip()
         if pag == 5:
+            Inicio.stop()
             terminar=True
 
     vary=0
@@ -173,24 +168,24 @@ if __name__=='__main__':
 
         Gro_Vidas.add(Aum_vida)
         todos.add(Aum_vida)
-
+    pos_X=400
     #numero de fantasmas
-    for i in range(5):
+    for i in range(15):
         NinjaVarios1=FuncionesTerreno.Recortar('Ninja.png',120,120)
         NinjaVarios=Enemigo.Enemigo(NinjaVarios1[0][0])
-        pos_X = random.randrange(5,10044)
         NinjaVarios.rect.x= pos_X
-        NinjaVarios.rect.y=random.randrange(550,600)
+        NinjaVarios.rect.y=550
         NinjaVarios.var_x=-2
+        pos_X+=1100
         enemigos.add(NinjaVarios)
         todos.add(NinjaVarios)
 
-    #if(parar== False):
-    #    MovimientoDragon= Dragon.rect.x
-    #    parar=True
+
 
     fin= False
     colorear= 1
+    MusicFon=pygame.mixer.Sound("Fondo.ogg")
+    no=0
     while not fin:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -213,42 +208,22 @@ if __name__=='__main__':
                     pucca.var_x=0
                     pucca.var_y=0
                 if event.key == pygame.K_p:
-                    ContadorMap+=2
-                    if pucca.dir == 0:
-                        b=Bala_Defen.Bala('Estrellaninja2.png')
-                        b.rect.x=pucca.rect.x
-                        b.rect.y=pucca.rect.y
-                        b.var_x=0
-                        b.var_y=10
-                        Estrella.add(b)
-                        todos.add(b)
-                        #ContadorMap+=32
-                    if pucca.dir == 1:
-                        b=Bala_Defen.Bala('Estrellaninja2.png')
-                        b.rect.x=pucca.rect.x
-                        b.rect.y=pucca.rect.y
-                        b.var_x=-10
-                        b.var_y=0
-                        Estrella.add(b)
-                        todos.add(b)
-                    if pucca.dir == 2:
-                        b=Bala_Defen.Bala('Estrellaninja2.png')
-                        b.rect.x=pucca.rect.x
-                        b.rect.y=pucca.rect.y
-                        b.var_x=10
-                        b.var_y=0
-                        Estrella.add(b)
-                        todos.add(b)
-                    if pucca.dir == 3:
-                        b=Bala_Defen.Bala('Estrellaninja2.png')
-                        b.rect.x=pucca.rect.x
-                        b.rect.y=pucca.rect.y
-                        b.var_x=0
-                        b.var_y=-10
-                        Estrella.add(b)
-                        todos.add(b)
+                    EstrellaN=pygame.mixer.Sound("SonidoEstrella.ogg")
+                    b=Bala_Defen.Bala('Estrellaninja2.png')
+                    EstrellaN.play(loops=2)
+                    b.rect.x=pucca.rect.x
+                    b.rect.y=pucca.rect.y
+                    b.var_x=10
+                    b.var_y=0
+                    Estrella.add(b)
+                    todos.add(b)
+
+        if no== 0:
+            MusicFon.play(loops=10)
+            no=1
 
         #lOGICA JUEGO            (VUELTA DE FANTASMAS)
+
         for J in Jugadores:
             ls_choque=pygame.sprite.spritecollide(J,Gro_Vidas,False)
             for V in ls_choque:
@@ -278,6 +253,7 @@ if __name__=='__main__':
                 Bloqueadores.remove(b)
                 Nro_VIDAS-=1
 
+
         if colorear == 1:
             #estrellas nijas
             for bl in Estrella:
@@ -296,12 +272,13 @@ if __name__=='__main__':
                         todos.remove(im)
 
             for Ene in enemigos:
-                if ( 2 == Ene.rect.x or 1 == Ene.rect.x or  0== Ene.rect.x ):
+                if (  0 == Ene.rect.x ):
                     enemigos.remove(Ene)
                     todos.remove(Ene)
 
 
             image=pygame.image.load("gameover.jpg")
+
             for caer in Caidas:
                 ls_impac=pygame.sprite.spritecollide(caer,Jugadores,False)
                 for ju in ls_impac:
@@ -329,7 +306,6 @@ if __name__=='__main__':
                 colorear=0
 
             pucca.image=animal[pucca.dir][pucca.con]
-
             for Ninja in enemigos:
                 Ninja.image=NinjaVarios1[NinjaVarios.dir][NinjaVarios.con]
 
@@ -351,6 +327,7 @@ if __name__=='__main__':
             reloj.tick(15)
         if colorear == 0:
             pantalla.blit(image,(0,0))
+            MusicFon.stop()
             pygame.display.flip()
             reloj.tick(15)
         if colorear == 3:
