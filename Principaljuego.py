@@ -20,6 +20,7 @@ ContadorMap=0
 ANCHO=1344
 ALTO=704
 Nro_VIDAS=5
+NumEstrellas=10
 Presen=0
 
 if __name__=='__main__':
@@ -41,10 +42,11 @@ if __name__=='__main__':
     pos_f=0
     animal=FuncionesTerreno.Recortar('pucca.png',62,66)
     pucca=Jugador.Jugador(animal[0][0])
+    Rayos=pygame.sprite.Group()
     Estrella=pygame.sprite.Group()
     Jugadores=pygame.sprite.Group()
     Jugadores.add(pucca)
-    Vidas_pucca=FuncionesTerreno.Recortar('vidas.png',50,50)
+    Vidas_pucca=FuncionesTerreno.Recortar('vidas.png',100,110)
     pucca_vidas=Vidas.Vida(Vidas_pucca[0][0])
 
     gru_Vidas_juego=pygame.sprite.Group
@@ -175,8 +177,8 @@ if __name__=='__main__':
         NinjaVarios=Enemigo.Enemigo(NinjaVarios1[0][0])
         NinjaVarios.rect.x= pos_X
         NinjaVarios.rect.y=550
-        NinjaVarios.var_x=-2
-        pos_X+=1100
+        NinjaVarios.var_x=-3
+        pos_X+=800
         enemigos.add(NinjaVarios)
         todos.add(NinjaVarios)
 
@@ -208,18 +210,38 @@ if __name__=='__main__':
                     pucca.var_x=0
                     pucca.var_y=0
                 if event.key == pygame.K_p:
-                    EstrellaN=pygame.mixer.Sound("SonidoEstrella.ogg")
-                    b=Bala_Defen.Bala('Estrellaninja2.png')
-                    EstrellaN.play(loops=2)
-                    b.rect.x=pucca.rect.x
-                    b.rect.y=pucca.rect.y
-                    b.var_x=10
-                    b.var_y=0
-                    Estrella.add(b)
-                    todos.add(b)
+                    if pucca.var_x<0 and NumEstrellas != 0:
+                        EstrellaN=pygame.mixer.Sound("SonidoEstrella.ogg")
+                        b=Bala_Defen.Bala('Estrellaninja2.png')
+                        EstrellaN.play(loops=2)
+                        b.rect.x=pucca.rect.x
+                        b.rect.y=pucca.rect.y
+                        b.var_x=-10
+                        b.var_y=0
+                        #NumEstrellas-=1
+                        Estrella.add(b)
+                        todos.add(b)
+                    if pucca.var_x>=0 and NumEstrellas != 0:
+                        EstrellaN=pygame.mixer.Sound("SonidoEstrella.ogg")
+                        b=Bala_Defen.Bala('Estrellaninja2.png')
+                        EstrellaN.play(loops=2)
+                        b.rect.x=pucca.rect.x
+                        b.rect.y=pucca.rect.y
+                        b.var_x=10
+                        b.var_y=0
+                        #NumEstrellas-=1
+                        Estrella.add(b)
+                        todos.add(b)
+                #if event.key == pygame.K_l:
+                #    pygame.time.wait()
+                #if event.key == pygame.K_k:
+                #    pygame.time.delay()
+
+
+
 
         if no== 0:
-            MusicFon.play(loops=10)
+            MusicFon.play(loops=50)
             no=1
 
         #lOGICA JUEGO            (VUELTA DE FANTASMAS)
@@ -227,7 +249,8 @@ if __name__=='__main__':
         for J in Jugadores:
             ls_choque=pygame.sprite.spritecollide(J,Gro_Vidas,False)
             for V in ls_choque:
-                Nro_VIDAS+=1
+                if Nro_VIDAS<5:
+                    Nro_VIDAS+=1
                 todos.remove(V)
                 Gro_Vidas.remove(V)
 
@@ -275,6 +298,14 @@ if __name__=='__main__':
                 if (  0 == Ene.rect.x ):
                     enemigos.remove(Ene)
                     todos.remove(Ene)
+                if Ene.dir==14 and Ene.rect.x<=1144 and Ene.rect.x>=1104:
+                    Rayol=FuncionesTerreno.Recortar('rayo.png',60,60)
+                    Rayo=Fuego.Rayo_Ene(Rayol[0][0])
+                    Rayo.rect.x=Ene.rect.x
+                    Rayo.rect.y=Ene.rect.y+90
+                    Rayos.add(Rayo)
+                    todos.add(Rayo)
+
 
 
             image=pygame.image.load("gameover.jpg")
