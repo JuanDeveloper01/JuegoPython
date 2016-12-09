@@ -306,7 +306,12 @@ if __name__=='__main__':
                     Rayos.add(Rayo)
                     todos.add(Rayo)
 
-
+            for J in Jugadores:
+                ls_choque=pygame.sprite.spritecollide(J,Rayos,False)
+                for E in ls_choque:
+                    Nro_VIDAS-=1
+                    todos.remove(E)
+                    Rayos.remove(E)
 
             image=pygame.image.load("gameover.jpg")
 
@@ -348,6 +353,8 @@ if __name__=='__main__':
             if pucca.rect.left <100:
                 pos_f-=6
             if pos_f>=0 and pos_f < (dim_fondoPriN.width - ANCHO):
+                #enemigos=pygame.sprite.Group()
+                #Caidas=pygame.sprite.Group()                                
                 ventana=fondoPriN.subsurface(pos_f,0, ANCHO, ALTO)
             pantalla.blit(ventana, (0,0))
 
